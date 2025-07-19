@@ -78,7 +78,7 @@ public:
     }
 
 private:
-    void sendNotification(const std::string& msg) {
+    void sendNotification(const std::string&) {
         // Not implemented stub
     }
 };

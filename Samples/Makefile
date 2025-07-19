@@ -104,6 +104,16 @@ GTEST_MAIN_LIB := $(GTEST_BUILD_DIR)/lib/libgtest_main.a
 GTEST_INCLUDE := $(GTEST_DIR)/googletest/include
 INCLUDES += -I$(GTEST_INCLUDE)
 
+gtest:
+	@if [ ! -d $(GTEST_DIR) ]; then \
+		git clone --depth 1 https://github.com/google/googletest.git $(GTEST_DIR); \
+	fi
+	@mkdir -p $(GTEST_BUILD_DIR)
+	cd $(GTEST_BUILD_DIR) && cmake .. && $(MAKE)
+	@mkdir -p $(GTEST_BUILD_DIR)/lib
+	@find $(GTEST_BUILD_DIR) -name 'libgtest*.a' -exec cp {} $(GTEST_BUILD_DIR)/lib/ \;
+
+
 # ----- .PHONY and all -----
 .PHONY: all clean gtest principles
 
